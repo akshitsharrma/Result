@@ -1,0 +1,41 @@
+.head
+{
+    margin: 0;
+        border:1px solid #0f0f0f;
+          background-color: black;
+        display:inline-block;
+        color:white;  
+        width:16%;
+      text-align: center; 
+    
+}
+
+.cell
+{
+  margin: 0;
+    display: inline-block;
+    width:16%;
+    border:1px solid #0f0f0f;    
+    background-color:white;
+     text-align: center;
+}
+.mid
+{
+  margin: 0;
+  display: inline-block;
+  width:16%;
+  border:1px solid #0f0f0f;    
+  background-color:lightpink;
+   text-align: center;
+   color:white;
+}
+.large
+{ margin: 0;
+  display: inline-block;
+  width:16%;
+  border:1px solid #0f0f0f;    
+  background-color:lightgreen;
+   text-align: center;
+   color: white;
+
+}

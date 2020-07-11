@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="asb.css">
+</head>
+<body>
+<label>Name:</label><input type="text" id="name1"><br>
+<label>Maths:</label><input type="text" id="math1"><br>
+<label>English:</label><input type="text" id="eng1"><br>
+<label>Computers:</label><input type="text" id="comp1"><br>
+<button id="btn1" onclick="add()">Add Details</button>
+<div id="display"></div>
+</body>
+<script>
+var s1= {"name":"Jack","maths":81,"eng":85,"comp":66}
+var s2= {"name":"Bob","maths":39,"eng":54,"comp":37}
+var s3= {"name":"Tim","maths":77,"eng":80,"comp":76}
+var s4= {"name":"Sam","maths":48,"eng":22,"comp":41}
+var s5= {"name":"Mary","maths":89,"eng":73,"comp":59}
+var students=[s1,s2,s3,s4,s5];
+show();
+function getindex(index)
+{var result=-1
+    for(var i=0;i<students.length;i++)
+    {
+        if(index==students[i].name)
+        {
+            result=i;
+        }
+    }
+    return result;
+}
+function add()
+{
+    var n1=document.getElementById("name1");
+    var n2=document.getElementById("math1");
+    var n3=document.getElementById("eng1");
+    var n4=document.getElementById("comp1");
+    var json={"name":n1.value,"maths":n2.value,"eng":n3.value,"comp":n4.value};
+    if(getindex(n1.value)<0)
+    {
+        students.push(json)
+        show();
+    }
+    else
+    {
+        alert("Name already exist");
+    }
+    n1.value="";
+    n2.value="";
+    n3.value="";
+    n4.value="";
+}
+
+function edit(index)
+{  var n1=document.getElementById("name1");
+    var n2=document.getElementById("math1");
+    var n3=document.getElementById("eng1");
+    var n4=document.getElementById("comp1");
+    var get=students[index];
+    n1.value=get.name;
+    n2.value=get.maths;
+    n3.value=get.eng;
+    n4.value=get.comp;
+    btn1.innerText="Update";
+    btn1.setAttribute("onclick","update("+index+")");
+}
+function update(index)
+{   var n1=document.getElementById("name1");
+    var n2=document.getElementById("math1");
+    var n3=document.getElementById("eng1");
+    var n4=document.getElementById("comp1");
+    var json={"name":n1.value,"maths":n2.value,"eng":n3.value,"comp":n4.value};
+   students[index]=json;
+show();
+btn1.innerText="Add";
+btn1.setAttribute(onclick,"add()");
+n1.value="";
+    n2.value="";
+    n3.value="";
+    n4.value="";
+
+}
+function remove(index)
+{
+students.splice(index,1);
+show();
+}
+
+
+function show()
+{
+    var str="";
+    var header1="<div class='head'>"+"Name"+"</div>";
+    var header2="<div class='head'>"+"Maths"+"</div>";
+    var header3="<div class='head'>"+"English"+"</div>";
+    var header4="<div class='head'>"+"Computers"+"</div>";
+    var header5="<div class='head'>&nbsp</div>";
+    var header6="<div class='head'>&nbsp</div>";
+ var header="<div >"+ header1+header2+header3+header4+header5+header6+"</div>"
+    str=str+header;
+    for(var i=0;i<students.length;i++)
+    {
+        var pr=students[i];
+        var name1="<div class='cell'>"+pr.name+"</div>";
+        if(pr.maths>=75)
+        {var math1="<div class='large'>"+pr.maths+"</div>";
+        }
+        else if(pr.maths<40)
+        {var math1="<div class='mid'>"+pr.maths+"</div>";}
+        else
+        { var math1="<div class='cell'>"+pr.maths+"</div>";}
+        if(pr.eng>=75)
+        {var eng1="<div class='large'>"+pr.maths+"</div>";
+        }
+        else if(pr.eng<40)
+        {var eng1="<div class='mid'>"+pr.eng+"</div>";}
+        else
+        { var eng1="<div class='cell'>"+pr.eng+"</div>";}
+        if(pr.comp>=75)
+        {var comp1="<div class='large'>"+pr.comp+"</div>";
+        }
+        else if(pr.comp<40)
+        {var comp1="<div class='mid'>"+pr.comp+"</div>";}
+        else
+        { var comp1="<div class='cell'>"+pr.comp+"</div>";}
+       
+        var rem1="<div class='cell'><button onclick=remove("+i+")>Remove</button></div>";
+        var edit1="<div class='cell'><button onclick=edit("+i+")>Edit</button></div>";
+        var row="<div>"+name1+math1+eng1+comp1+rem1+edit1+"<div>";
+        str=str+row;
+    }
+    var table=document.getElementById("display");
+    table.innerHTML=str;
+}
+
+</script>
+</html>
